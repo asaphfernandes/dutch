@@ -16,14 +16,23 @@ ReactDOM.render(
           height: '100vh',
           border: 'none'
         },
-        'body': {
+        'body, input, button': {
           fontFamily: "'Roboto', sans-serif",
           fontSize: '15px'
+        },
+        'div':{
+          display: 'flex'
+        },
+        '#root':{
+          display: 'block',
+          height: '100%'
         },
         'button': {
           width: '100%',
           height: '100%',
-          border: 'none'
+          border: 'none',
+          cursor: 'pointer',
+          padding: 8
         }
       }} />
 

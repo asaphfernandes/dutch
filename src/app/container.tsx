@@ -9,13 +9,15 @@ const Container = styled('div')({
     ' .topbar, .footer': {
       height: '56px',
       display: 'flex',
-      flexDirection: 'row',
-      backgroundColor: 'red'
+      flexDirection: 'row'
     },
     ' .topbar': {
     },
     ' .content': {
-      flex: 1
+      flex: 1,
+      flexDirection: 'column',
+      backgroundColor: '#fff',
+      padding: '16px 16px 24px 16px'
     },
     ' .footer': {
   

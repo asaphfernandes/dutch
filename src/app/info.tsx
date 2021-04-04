@@ -1,14 +1,21 @@
+import styled from '@emotion/styled';
 import React from 'react';
-import IStatusGameModel from './status-game.model';
 import { maskNumber00 } from './util';
 
+const InfoJss = styled('div')({
+    flex: 2,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  });
+
 interface IInfo {
-    statusGame: IStatusGameModel
+    round: number
 }
 
 const Info: React.FC<IInfo> = (props) => {
-    const { statusGame } = props;
-    const [dateTime, setDateTime] = React.useState('');
+    const { round } = props;
+    const [dateTime, setDateTime] = React.useState('01/01/2021 00:00:00');
 
     React.useEffect(() => {
         setInterval(() => {
@@ -24,10 +31,10 @@ const Info: React.FC<IInfo> = (props) => {
         }, 1000);
     }, []);
 
-    return (<div>
-        <p id='clock'>{dateTime}</p>
-        <p id='title'>{statusGame.round === 0 ? 'Bom jogo' : `Round ${maskNumber00(statusGame.round)}`}</p>
-    </div>);
+    return (<InfoJss>
+        <span>{dateTime}</span>
+        <span>{round === 0 ? 'Bom jogo' : `Round ${maskNumber00(round)}`}</span>
+    </InfoJss>);
 }
 
 export default Info;
