@@ -1,40 +1,47 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Global } from '@emotion/react';
+import Container from './container';
+import Info from './info';
+import NewGame from './new-game';
+import IStatusGameModel from './status-game.model';
+
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 }
 
 const ButtonNewGame = styled('button')<IButtonProps>({
-  color: 'red'
+  color: 'red',
+  width: 'initial'
 });
 
-function App() {
-  return (<div>
-    <Global
-      styles={{
-        '*': {
-          margin: 0,
-          padding: 0,
-          outline: 0
-        },
-        'html, body': {
-          height: '100%'
-        },
-        'body': {
-          fontFamily: "'Roboto', sans-serif",
-          fontSize: '15px'
-        },
-        'button': {
-          width: '100%',
-          height: '100%',
-          border: 'none'
-        }
-      }} />
+const STATUS_GAME_STORAGE = 'status@dutch';
 
-    <ButtonNewGame>Novo Jogo</ButtonNewGame>
-  </div>);
+function App() {
+
+  const [statusGame] = React.useState(() => {
+    var storage = localStorage.getItem(STATUS_GAME_STORAGE);
+    if(storage === null){
+      return {
+        round: 0,
+        players: []
+      } as IStatusGameModel;
+    }else{
+      return JSON.parse(storage) as IStatusGameModel;
+    }
+  });
+
+  return (<Container>
+    <div className='topbar'>
+      <Info statusGame={statusGame} />
+      <NewGame />
+      <ButtonNewGame>Novo Jogo</ButtonNewGame>
+    </div>
+    <div className='content'>Participantes</div>
+    <div className='footer'>Ações</div>
+
+
+  </Container>);
 }
 
 export default App;
